@@ -1,0 +1,6 @@
+{
+  "name": "VÉORA — Premium Art & Handmade Creations Store",
+  "description": "Art that speaks without words. Luxury handcrafted canvas paintings, 3D texture art, living decor, and custom art commissions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
