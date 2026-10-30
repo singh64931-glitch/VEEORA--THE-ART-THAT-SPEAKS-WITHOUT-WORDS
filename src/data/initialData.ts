@@ -3,6 +3,12 @@ import { Product, Review, CustomArtworkInquiry, Order } from '../types';
 export const VEORA_LOGO_PATH = '/assets/aistudio/VEEORA__Artful_Elegance_in_Green_and_Gold_b9b7457a.png';
 export const ATELIER_HERO_PATH = '/src/assets/images/artisan_atelier_studio_1793382063717.jpg';
 
+// Official Atelier Contact Coordinates
+export const VEORA_WHATSAPP_NUMBER = '919586120583';
+export const VEORA_WHATSAPP_FORMATTED = '+91 95861 20583';
+export const VEORA_WHATSAPP_URL = 'https://wa.me/919586120583';
+export const VEORA_CONTACT_EMAIL = 'singh.64931@gmail.com';
+
 export const INITIAL_PRODUCTS: Product[] = [
   {
     id: 'prod-alpine-serenity',
@@ -228,7 +234,7 @@ export const INITIAL_ORDERS: Order[] = [
     totalAmount: 38500,
     customerName: 'Ananya Singhania',
     customerEmail: 'ananya.singhania@outlook.com',
-    customerPhone: '+91 98200 12345',
+    customerPhone: '+91 98980 11223',
     address: 'Flat 14B, Samudra Mahal, Worli Seaface',
     city: 'Mumbai',
     state: 'Maharashtra',

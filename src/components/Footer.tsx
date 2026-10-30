@@ -127,24 +127,32 @@ export const Footer: React.FC = () => {
 
             <div className="space-y-2 pt-1 text-stone-200">
               <a
-                href="https://wa.me/919820012345"
+                href="https://wa.me/919586120583"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 hover:text-[#25D366] transition-colors"
+                title="Chat with VÉORA on WhatsApp"
               >
                 <MessageSquareQuote className="w-4 h-4 text-[#25D366]" />
-                <span>WhatsApp: +91 98200 12345</span>
+                <span>WhatsApp: +91 95861 20583</span>
               </a>
 
-              <div className="flex items-center gap-2 text-stone-300">
+              <a
+                href="mailto:singh.64931@gmail.com"
+                className="flex items-center gap-2 text-stone-300 hover:text-white transition-colors"
+                title="Email VÉORA Atelier"
+              >
                 <Mail className="w-4 h-4 text-[#C5A880]" />
-                <span>atelier@veora.art</span>
-              </div>
+                <span>singh.64931@gmail.com</span>
+              </a>
 
-              <div className="flex items-center gap-2 text-stone-300">
+              <a
+                href="tel:+919586120583"
+                className="flex items-center gap-2 text-stone-300 hover:text-white transition-colors"
+              >
                 <Phone className="w-4 h-4 text-[#C5A880]" />
-                <span>Mon – Sat · 10:00 AM – 7:00 PM IST</span>
-              </div>
+                <span>+91 95861 20583 (Mon – Sat · 10 AM – 7 PM IST)</span>
+              </a>
             </div>
 
             <div className="pt-2 text-[11px] text-stone-400">

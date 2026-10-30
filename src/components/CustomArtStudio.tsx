@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useStore } from '../context/StoreContext';
 import { CustomArtworkInquiry } from '../types';
-import { Palette, Upload, Calendar, IndianRupee, Sparkles, CheckCircle2, Clock, ShieldCheck, ArrowRight, X } from 'lucide-react';
+import {
+  VEORA_WHATSAPP_NUMBER,
+  VEORA_WHATSAPP_FORMATTED,
+  VEORA_WHATSAPP_URL,
+  VEORA_CONTACT_EMAIL,
+} from '../data/initialData';
+import { Palette, Upload, Calendar, IndianRupee, Sparkles, CheckCircle2, Clock, ShieldCheck, ArrowRight, X, MessageSquareQuote, Mail } from 'lucide-react';
 
 export const CustomArtStudio: React.FC = () => {
   const { submitInquiry, setCurrentView } = useStore();
@@ -115,25 +121,46 @@ export const CustomArtStudio: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
                 <p>
-                  <strong>Transparent Milestone Pricing:</strong> Custom pricing, canvas preparation timelines, and delivery logistics are finalized and confirmed with you directly via WhatsApp/Email before any work commences.
+                  <strong>Direct Artisan Connection:</strong> You can also message or email our atelier with your reference ID for immediate assistance on WhatsApp: <strong>{VEORA_WHATSAPP_FORMATTED}</strong> or Email: <strong>{VEORA_CONTACT_EMAIL}</strong>.
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+            {/* Direct Contact Links */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={`${VEORA_WHATSAPP_URL}?text=${encodeURIComponent(`Hello VÉORA Atelier! I just submitted commission inquiry #${submittedInquiryId}. Looking forward to discussing dimensions and colors.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5"
+              >
+                <MessageSquareQuote className="w-4 h-4" />
+                <span>Message on WhatsApp ({VEORA_WHATSAPP_FORMATTED})</span>
+              </a>
+
+              <a
+                href={`mailto:${VEORA_CONTACT_EMAIL}?subject=${encodeURIComponent(`Commission Inquiry #${submittedInquiryId}`)}`}
+                className="px-5 py-2.5 bg-[#1C2E24] hover:bg-[#253D30] text-[#E8DFC8] text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Email Studio ({VEORA_CONTACT_EMAIL})</span>
+              </a>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 border-t border-[#F0EBE3]">
               <button
                 onClick={() => {
                   setIsSubmitted(false);
                   setConceptDescription('');
                   setReferenceImages([]);
                 }}
-                className="px-6 py-3 border border-[#E3DBD2] text-stone-700 hover:bg-[#F8F5F0] text-xs font-semibold tracking-wider uppercase rounded-md transition-colors"
+                className="px-6 py-2.5 border border-[#E3DBD2] text-stone-700 hover:bg-[#F8F5F0] text-xs font-semibold tracking-wider uppercase rounded-md transition-colors"
               >
                 Submit Another Request
               </button>
               <button
                 onClick={() => setCurrentView('catalog')}
-                className="px-6 py-3 bg-[#1C2E24] text-[#E8DFC8] hover:bg-[#253D30] text-xs font-semibold tracking-wider uppercase rounded-md transition-colors"
+                className="px-6 py-2.5 bg-[#1C2E24] text-[#E8DFC8] hover:bg-[#253D30] text-xs font-semibold tracking-wider uppercase rounded-md transition-colors"
               >
                 Return to Collection
               </button>
@@ -347,7 +374,7 @@ export const CustomArtStudio: React.FC = () => {
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98200 00000"
+                    placeholder="+91 95861 20583"
                     value={clientPhone}
                     onChange={(e) => setClientPhone(e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-[#E8E2D8] rounded-lg text-sm text-stone-900 focus:outline-none focus:border-[#1C2E24]"
@@ -369,12 +396,15 @@ export const CustomArtStudio: React.FC = () => {
             </div>
 
             {/* Notice explaining custom pricing and timelines are confirmed after review */}
-            <div className="p-4 bg-[#F7F4EE] rounded-xl border border-[#EDE7DF] text-xs text-stone-600 font-sans space-y-1">
+            <div className="p-4 bg-[#F7F4EE] rounded-xl border border-[#EDE7DF] text-xs text-stone-600 font-sans space-y-1.5">
               <p className="font-semibold text-stone-800">
                 Notice Regarding Bespoke Orders:
               </p>
               <p>
                 Custom pricing and production timelines are confirmed after our artist reviews your exact dimensions and requirements. No payment is charged today. You will receive an official quotation and preliminary visual concept via WhatsApp and Email.
+              </p>
+              <p className="text-[11px] text-stone-500 pt-1 border-t border-[#E8E2D8]">
+                For immediate consultations or urgent milestones, reach our studio directly on WhatsApp: <a href={VEORA_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-[#355B46] font-semibold underline">{VEORA_WHATSAPP_FORMATTED}</a> or Email: <a href={`mailto:${VEORA_CONTACT_EMAIL}`} className="text-[#355B46] font-semibold underline">{VEORA_CONTACT_EMAIL}</a>.
               </p>
             </div>
 

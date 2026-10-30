@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useStore, formatPrice } from '../context/StoreContext';
 import { Product } from '../types';
-import { X, Heart, ShoppingBag, ShieldCheck, Truck, RefreshCw, ZoomIn, MessageSquareQuote, Check, Sparkles } from 'lucide-react';
+import {
+  VEORA_WHATSAPP_NUMBER,
+  VEORA_WHATSAPP_FORMATTED,
+  VEORA_WHATSAPP_URL,
+  VEORA_CONTACT_EMAIL,
+} from '../data/initialData';
+import { X, Heart, ShoppingBag, ShieldCheck, Truck, RefreshCw, ZoomIn, MessageSquareQuote, Check, Sparkles, Mail } from 'lucide-react';
 
 export const ProductDetailModal: React.FC = () => {
   const {
@@ -31,11 +37,18 @@ export const ProductDetailModal: React.FC = () => {
   };
 
   const handleWhatsAppInquiry = () => {
-    const phone = '919820012345'; // VÉORA Atelier Official WhatsApp Line
     const text = encodeURIComponent(
       `Hello VÉORA Atelier! I am interested in your original creation "${selectedProduct.title}" (${selectedProduct.dimensions}, ${formatPrice(selectedProduct.price)}). Could you provide further details or framing consultation?`
     );
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    window.open(`${VEORA_WHATSAPP_URL}?text=${text}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleEmailInquiry = () => {
+    const subject = encodeURIComponent(`Artwork Inquiry: ${selectedProduct.title} (${selectedProduct.dimensions})`);
+    const body = encodeURIComponent(
+      `Dear VÉORA Atelier,\n\nI am inquiring about the original artwork "${selectedProduct.title}" (${selectedProduct.dimensions}, ${formatPrice(selectedProduct.price)}).\n\nPlease provide framing options, authenticity details, and delivery timelines.\n\nThank you!`
+    );
+    window.location.href = `mailto:${VEORA_CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -220,27 +233,37 @@ export const ProductDetailModal: React.FC = () => {
                   </button>
                 </div>
 
-                {/* WhatsApp Artisan Inquire & Custom Commission CTA */}
+                {/* WhatsApp Artisan Inquire & Email CTA */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <button
                     onClick={handleWhatsAppInquiry}
-                    className="py-2.5 px-3 bg-[#EAE5DC] hover:bg-[#E2DDD3] text-[#1C2E24] font-medium rounded-md transition-colors flex items-center justify-center gap-1.5"
+                    className="py-2.5 px-3 bg-[#EAE5DC] hover:bg-[#E2DDD3] text-[#1C2E24] font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={`WhatsApp: ${VEORA_WHATSAPP_FORMATTED}`}
                   >
                     <MessageSquareQuote className="w-3.5 h-3.5 text-[#25D366]" />
                     <span>Inquire on WhatsApp</span>
                   </button>
 
                   <button
-                    onClick={() => {
-                      closeProductModal();
-                      setCurrentView('custom-studio');
-                    }}
-                    className="py-2.5 px-3 border border-[#C5A880] text-[#7A6142] hover:bg-[#F2ECE4] font-medium rounded-md transition-colors flex items-center justify-center gap-1.5"
+                    onClick={handleEmailInquiry}
+                    className="py-2.5 px-3 bg-[#FAF8F5] hover:bg-[#F2ECE4] border border-[#E8E2D8] text-stone-800 font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={`Email: ${VEORA_CONTACT_EMAIL}`}
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-                    <span>Custom Commission</span>
+                    <Mail className="w-3.5 h-3.5 text-[#C5A880]" />
+                    <span>Email Atelier</span>
                   </button>
                 </div>
+
+                <button
+                  onClick={() => {
+                    closeProductModal();
+                    setCurrentView('custom-studio');
+                  }}
+                  className="w-full py-2 px-3 border border-[#C5A880] text-[#7A6142] hover:bg-[#F2ECE4] font-medium text-xs rounded-md transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+                  <span>Request Custom Sizing / Commission</span>
+                </button>
 
                 {/* Shipping & Delivery Guarantee */}
                 <div className="pt-2 flex items-center justify-between text-[11px] text-stone-500 font-sans">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../context/StoreContext';
-import { VEORA_LOGO_PATH } from '../data/initialData';
-import { ShoppingBag, Heart, Shield, Menu, X, ArrowUpRight } from 'lucide-react';
+import { VEORA_LOGO_PATH, VEORA_WHATSAPP_FORMATTED, VEORA_WHATSAPP_URL, VEORA_CONTACT_EMAIL } from '../data/initialData';
+import { ShoppingBag, Heart, Shield, Menu, X, ArrowUpRight, MessageSquareQuote, Mail } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const {
@@ -23,13 +23,42 @@ export const Navbar: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleContactClick = () => {
+    setMobileMenuOpen(false);
+    if (currentView !== 'home') {
+      setCurrentView('home');
+    }
+    setTimeout(() => {
+      const el = document.getElementById('contact-us');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 60);
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-[#FBF9F5]/90 backdrop-blur-md border-b border-[#E8E2D8] transition-colors">
-      {/* Top Announcement Bar */}
-      <div className="bg-[#1C2E24] text-[#E8DFC8] text-xs py-1.5 px-4 text-center tracking-widest uppercase font-medium flex items-center justify-center gap-2">
-        <span>Complimentary Insured White-Glove Shipping Across India</span>
+      {/* Top Announcement Bar with Official Contacts */}
+      <div className="bg-[#1C2E24] text-[#E8DFC8] text-xs py-1.5 px-4 text-center tracking-widest uppercase font-medium flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+        <span>Complimentary Insured Shipping Across India</span>
         <span className="hidden md:inline text-[#C5A880]">·</span>
-        <span className="hidden md:inline text-stone-300 font-normal">Authenticity Certificate with Every Original Artwork</span>
+        <a
+          href={VEORA_WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-white transition-colors flex items-center gap-1 normal-case tracking-normal text-[11px]"
+          title={`WhatsApp: ${VEORA_WHATSAPP_FORMATTED}`}
+        >
+          <MessageSquareQuote className="w-3.5 h-3.5 text-[#25D366]" />
+          <span>WhatsApp: {VEORA_WHATSAPP_FORMATTED}</span>
+        </a>
+        <span className="hidden sm:inline text-[#C5A880]">·</span>
+        <a
+          href={`mailto:${VEORA_CONTACT_EMAIL}`}
+          className="hover:text-white transition-colors flex items-center gap-1 normal-case tracking-normal text-[11px]"
+          title={`Email: ${VEORA_CONTACT_EMAIL}`}
+        >
+          <Mail className="w-3.5 h-3.5 text-[#C5A880]" />
+          <span>{VEORA_CONTACT_EMAIL}</span>
+        </a>
       </div>
 
       {/* Main Navigation Bar */}
@@ -95,6 +124,12 @@ export const Navbar: React.FC = () => {
               }`}
             >
               The Atelier Story
+            </button>
+            <button
+              onClick={handleContactClick}
+              className="whitespace-nowrap transition-colors py-1 hover:text-[#1C2E24] text-stone-700"
+            >
+              Contact Us
             </button>
           </nav>
 
@@ -196,10 +231,38 @@ export const Navbar: React.FC = () => {
               <span>The Atelier Story</span>
               <ArrowUpRight className="w-4 h-4 text-stone-400" />
             </button>
+            <button
+              onClick={handleContactClick}
+              className="text-left py-2 hover:text-[#1C2E24] flex items-center justify-between"
+            >
+              <span>Contact Us</span>
+              <ArrowUpRight className="w-4 h-4 text-stone-400" />
+            </button>
           </div>
-          <div className="pt-4 border-t border-[#E8E2D8] flex items-center justify-between">
+
+          {/* Quick Mobile Contact Actions */}
+          <div className="pt-3 border-t border-[#E8E2D8] grid grid-cols-2 gap-2 text-xs">
+            <a
+              href={VEORA_WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 bg-[#25D366] text-white rounded-lg flex items-center justify-center gap-1.5 font-semibold text-[11px]"
+            >
+              <MessageSquareQuote className="w-4 h-4" />
+              <span>WhatsApp</span>
+            </a>
+            <a
+              href={`mailto:${VEORA_CONTACT_EMAIL}`}
+              className="p-2.5 bg-[#1C2E24] text-[#E8DFC8] rounded-lg flex items-center justify-center gap-1.5 font-semibold text-[11px]"
+            >
+              <Mail className="w-4 h-4" />
+              <span>Email Studio</span>
+            </a>
+          </div>
+
+          <div className="pt-3 border-t border-[#E8E2D8] flex items-center justify-between">
             <span className="text-xs text-stone-500 font-sans tracking-wide">
-              VÉORA Atelier · India
+              {VEORA_WHATSAPP_FORMATTED}
             </span>
             <button
               onClick={() => {

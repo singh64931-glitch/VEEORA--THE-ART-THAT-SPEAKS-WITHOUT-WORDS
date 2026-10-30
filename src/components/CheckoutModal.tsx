@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useStore, formatPrice } from '../context/StoreContext';
 import { PaymentMethod, Order } from '../types';
-import { X, CheckCircle2, QrCode, CreditCard, Banknote, Building2, Smartphone, MessageSquareQuote, ShieldCheck, Printer, ArrowRight, Truck } from 'lucide-react';
+import {
+  VEORA_WHATSAPP_NUMBER,
+  VEORA_WHATSAPP_FORMATTED,
+  VEORA_WHATSAPP_URL,
+  VEORA_CONTACT_EMAIL,
+} from '../data/initialData';
+import { X, CheckCircle2, QrCode, CreditCard, Banknote, Building2, Smartphone, MessageSquareQuote, ShieldCheck, Printer, ArrowRight, Truck, Mail } from 'lucide-react';
 
 export const CheckoutModal: React.FC = () => {
   const {
@@ -76,7 +82,7 @@ export const CheckoutModal: React.FC = () => {
         items: orderItems,
         totalAmount: cartTotal,
         customerName,
-        customerEmail: customerEmail || 'patron@veora.in',
+        customerEmail: customerEmail || VEORA_CONTACT_EMAIL,
         customerPhone,
         address,
         city,
@@ -95,12 +101,11 @@ export const CheckoutModal: React.FC = () => {
   };
 
   const handleWhatsAppCheckout = () => {
-    const phone = '919820012345';
     const itemsList = cart
       .map((item) => `• ${item.product.title} (x${item.quantity}) - ${formatPrice(item.product.price)}`)
       .join('\n');
     const msg = `*VÉORA Atelier Order Inquiry*\n\nCustomer: ${customerName || 'Art Patron'}\nPhone: ${customerPhone}\nDelivery City: ${city || 'India'}\n\n*Artworks:*\n${itemsList}\n\n*Total:* ${formatPrice(cartTotal)}\n\nPlease assist me with payment confirmation & dispatch details.`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`${VEORA_WHATSAPP_URL}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
   };
 
   // Generate real dynamic UPI string for QR Code
@@ -274,7 +279,7 @@ export const CheckoutModal: React.FC = () => {
                         <input
                           type="tel"
                           required
-                          placeholder="+91 98200 00000"
+                          placeholder="+91 95861 20583"
                           value={customerPhone}
                           onChange={(e) => setCustomerPhone(e.target.value)}
                           className="w-full px-3.5 py-2.5 bg-white border border-[#E8E2D8] rounded-lg text-sm focus:border-[#1C2E24] outline-none"
